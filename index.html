@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="logo2.png" type="image/png">
+    <link rel="icon" href="https://i.imgur.com/jM5y1qT.png" type="image/png">
     <title>Portal de Aplicaciones Maquipan</title>
     <style>
         /* Estilos CSS Base */
@@ -28,7 +28,7 @@
             font-family: var(--font-main); margin: 0;
             background-color: var(--bg-primary); background-image: var(--bg-gradient);
             color: var(--text-primary); transition: background-color var(--transition-speed), color var(--transition-speed);
-            display: flex; align-items: center; justify-content: center; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem 0;
         }
         .container { max-width: 900px; width: 100%; margin: 0 auto; padding: 1rem 1.5rem; }
         .header-controls {
@@ -37,15 +37,15 @@
             border-radius: 12px 12px 0 0; border: 1px solid var(--border-color); border-bottom: none;
         }
         .header-title { display: flex; align-items: center; gap: 1rem; }
-        .logo { 
-            width: auto;
-            height: 100px;
-            object-fit: contain;
-        }
+        .logo { height: 35px; width: auto; object-fit: contain; }
         .header-controls h1 { margin: 0; font-size: 1.5rem; color: var(--text-primary); font-weight: 600; }
         .card { 
             background-color: var(--bg-secondary); border: 1px solid var(--border-color);
             border-radius: 0 0 12px 12px; padding: 2.5rem;
+        }
+        .widget-card {
+            background-color: var(--bg-secondary); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem;
         }
         #welcome-header { text-align: center; margin-bottom: 2.5rem; }
         #greeting { font-size: 1.8rem; font-weight: 600; color: var(--text-primary); margin: 0; }
@@ -70,44 +70,20 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .link-button:nth-child(1) { animation-delay: 0.1s; } .link-button:nth-child(2) { animation-delay: 0.2s; }
         .link-button:nth-child(3) { animation-delay: 0.3s; } .link-button:nth-child(4) { animation-delay: 0.4s; }
-        
-        /* --- NUEVO: Contenedor para elementos de la derecha de la cabecera --- */
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        
-        /* --- NUEVO: Estilos para el Widget del Clima --- */
+        .header-right { display: flex; align-items: center; gap: 1.5rem; }
         #weather-widget {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-secondary);
-            border-right: 1px solid var(--border-color);
-            padding-right: 1.5rem;
+            display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary);
+            border-right: 1px solid var(--border-color); padding-right: 1.5rem;
         }
-        #weather-icon {
-            width: 40px;
-            height: 40px;
-        }
-        #weather-temp {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        #weather-desc {
-            font-size: 0.9rem;
-            text-transform: capitalize;
-        }
-
+        #weather-icon { width: 40px; height: 40px; }
+        #weather-temp { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); }
+        #weather-desc { font-size: 0.9rem; text-transform: capitalize; }
         .theme-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
         .theme-switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--bg-tertiary); transition: var(--transition-speed); border-radius: 26px; }
         .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: var(--transition-speed); border-radius: 50%; }
         input:checked + .slider { background-color: var(--accent); }
         input:checked + .slider:before { transform: translateX(24px); }
-        
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(36, 40, 59, 0.7); backdrop-filter: blur(5px);
@@ -138,7 +114,7 @@
     <div class="container">
         <div class="header-controls">
             <div class="header-title">
-                <img src="logo2.png" alt="Logo Maquipan" class="logo">
+                <img src="https://i.imgur.com/jM5y1qT.png" alt="Logo Maquipan" class="logo">
                 <h1>Portal de Aplicaciones</h1>
             </div>
             <div class="header-right">
@@ -186,6 +162,38 @@
                 </a>
             </div>
         </div>
+
+        <div class="widget-card">
+            <div id="horoscope-widget" style="text-align: center;">
+                <h3 style="margin-top:0; color: var(--text-primary);">Horóscopo del Día</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Selecciona tu signo para ver tu predicción:</p>
+                <select id="sign-selector" style="width: 200px; padding: 0.5rem; font-size: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-tertiary); color: var(--text-primary);">
+                    <option value="" disabled selected>Elige un signo</option>
+                    <option value="aries">Aries</option><option value="taurus">Tauro</option><option value="gemini">Géminis</option>
+                    <option value="cancer">Cáncer</option><option value="leo">Leo</option><option value="virgo">Virgo</option>
+                    <option value="libra">Libra</option><option value="scorpio">Escorpio</option><option value="sagittarius">Sagitario</option>
+                    <option value="capricorn">Capricornio</option><option value="aquarius">Acuario</option><option value="pisces">Piscis</option>
+                </select>
+                <div id="horoscope-result" style="margin-top: 1.5rem; padding: 1rem; border: 1px dashed var(--border-color); border-radius: 8px; min-height: 100px; color: var(--text-secondary);">
+                    <p id="horoscope-text">Tu predicción aparecerá aquí...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+            <div class="widget-card">
+                <h3 style="margin-top:0;">Novedades Maquipan</h3>
+                <ul id="news-list" style="padding-left: 20px; color: var(--text-secondary);"></ul>
+            </div>
+            <div class="widget-card" style="text-align: center;">
+                <h3 style="margin-top:0;">🎉 ¡Feliz Cumpleaños! 🎉</h3>
+                <p id="birthday-names" style="color: var(--accent); font-weight: bold;"></p>
+            </div>
+            <div class="widget-card" style="text-align: center;">
+                <h3 style="margin-top:0;">Sabías que...</h3>
+                <p id="daily-fact" style="font-style: italic; color: var(--text-secondary);"></p>
+            </div>
+        </div>
     </div>
 
     <div class="modal-overlay" id="password-modal">
@@ -231,66 +239,86 @@
         const passwordInput = document.getElementById('password-input');
         const cancelBtn = document.getElementById('modal-cancel-btn');
         const submitBtn = document.getElementById('modal-submit-btn');
-
         function checkPassword() {
-            const encodedPass = "QW1vYVBpbWVudGVs";
-            const url = "https://maquipan.github.io/Planificacion/";
+            const encodedPass = "QW1vYVBpbWVudGVs"; const url = "https://maquipan.github.io/Planificacion/";
             if (passwordInput.value.trim() === atob(encodedPass)) {
-                window.open(url, '_blank');
-                passwordModal.style.display = 'none';
-                passwordInput.value = "";
-            } else {
-                alert("Clave incorrecta.");
-                passwordInput.focus();
-            }
+                window.open(url, '_blank'); passwordModal.style.display = 'none'; passwordInput.value = "";
+            } else { alert("Clave incorrecta."); passwordInput.focus(); }
         }
-        
         planificacionLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            passwordModal.style.display = 'flex';
-            passwordInput.focus();
+            event.preventDefault(); passwordModal.style.display = 'flex'; passwordInput.focus();
         });
-        
         cancelBtn.addEventListener('click', () => { passwordModal.style.display = 'none'; });
         passwordModal.addEventListener('click', (event) => { if (event.target === passwordModal) { passwordModal.style.display = 'none'; }});
         submitBtn.addEventListener('click', checkPassword);
-        passwordInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
-        });
+        passwordInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') { checkPassword(); } });
 
-        // --- NUEVO: Lógica para obtener y mostrar el Clima ---
+        // --- Lógica del Clima ---
         const fetchWeather = () => {
-            const apiKey = '047bc4a894d2f2cfbaf93df3c32ecd55'; 
-            const cityId = '3868621'; // Villa Alemana, Chile
+            const apiKey = '047bc4a894d2f2cfbaf93df3c32ecd55'; const cityId = '3868621'; // Villa Alemana, CL
             const apiUrl = `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}&units=metric&lang=es`;
-
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) throw new Error('Error de red o API Key inválida.');
-                    return response.json();
-                })
+            fetch(apiUrl).then(response => { if (!response.ok) throw new Error('Error de red.'); return response.json(); })
                 .then(data => {
-                    const temp = Math.round(data.main.temp);
-                    const description = data.weather[0].description;
-                    const iconCode = data.weather[0].icon;
-                    
-                    document.getElementById('weather-temp').textContent = `${temp}°C`;
-                    document.getElementById('weather-desc').textContent = description;
-                    document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-                    document.getElementById('weather-icon').alt = description;
-                })
-                .catch(error => {
-                    console.error('Error al cargar el clima:', error);
-                    document.getElementById('weather-desc').textContent = 'Error clima';
-                });
+                    document.getElementById('weather-temp').textContent = `${Math.round(data.main.temp)}°C`;
+                    document.getElementById('weather-desc').textContent = data.weather[0].description;
+                    document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+                    document.getElementById('weather-icon').alt = data.weather[0].description;
+                }).catch(error => { console.error('Error al cargar el clima:', error); document.getElementById('weather-desc').textContent = 'Error clima'; });
         };
 
-        // Llama a la función del clima al cargar la página
+        // --- Lógica del Horóscopo (NUEVA API) ---
+        const fetchHoroscope = (sign) => {
+            const horoscopeTextEl = document.getElementById('horoscope-text');
+            if (!sign) { return; }
+            horoscopeTextEl.textContent = 'Cargando tu horóscopo...';
+            // Esta API (horoscope-app-api) es más estable y no requiere registro.
+            fetch(`https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=${sign}&day=TODAY`)
+                .then(response => { 
+                    if (!response.ok) throw new Error('API no disponible o signo inválido.'); 
+                    return response.json(); 
+                })
+                .then(data => {
+                    // La API devuelve el texto en 'horoscope_data'
+                    const prediction = data.data.horoscope_data;
+                    horoscopeTextEl.textContent = prediction;
+                }).catch(error => { 
+                    console.error('Error al cargar el horóscopo:', error); 
+                    horoscopeTextEl.textContent = 'No se pudo cargar tu predicción en este momento.'; 
+                });
+        };
+        document.getElementById('sign-selector').addEventListener('change', (event) => fetchHoroscope(event.target.value));
+
+
+        // --- Lógica de Novedades ---
+        const news = [ { date: "30/07/2025", text: "¡Nuevo récord de instalaciones en la V Región!" }, { date: "25/07/2025", text: "Capacitación de seguridad programada para el próximo viernes." }, { date: "22/07/2025", text: "Bienvenidos los nuevos integrantes al equipo técnico." }];
+        const newsList = document.getElementById('news-list');
+        news.forEach(item => { const li = document.createElement('li'); li.innerHTML = `<b>${item.date}:</b> ${item.text}`; newsList.appendChild(li); });
+        
+        // --- Lógica de Cumpleaños ---
+        const birthdays = [ { name: "Juan Pérez", month: 7, day: 30 }, { name: "Anaís Rivera", month: 8, day: 1 } ];
+        const currentMonth = new Date().getMonth() + 1; const currentDay = new Date().getDate();
+        const todaysBirthdays = birthdays.filter(b => b.month === currentMonth && b.day === currentDay);
+        const birthdayNamesEl = document.getElementById('birthday-names');
+        if (todaysBirthdays.length > 0) { birthdayNamesEl.textContent = todaysBirthdays.map(b => b.name).join(', '); } 
+        else { birthdayNamesEl.textContent = "Hoy no hay cumpleaños en el equipo."; }
+
+        // --- Lógica del Dato Curioso ---
+        const facts = [
+            "El pan es uno de los alimentos más antiguos, con evidencias de hace más de 14,000 años.", "La primera máquina para amasar pan fue inventada por un ingeniero francés en 1760.",
+            "Contrario a la creencia popular, el croissant se originó en Viena, Austria, no en Francia.", "El olor a pan recién horneado es uno de los que genera mayor sensación de confort y hogar.",
+            "La Torre Eiffel puede ser 15 cm más alta durante el verano.", "Los pulpos tienen tres corazones y su sangre es azul.",
+            "En Suiza es ilegal tener solo una cobaya (cuy).", "El corazón de una ballena azul es tan grande que un humano podría nadar por sus arterias.",
+            "Las abejas pueden reconocer rostros humanos.", "La miel nunca se echa a perder.", "Un grupo de flamencos se llama 'flamboyance'.",
+            "Hay más árboles en la Tierra que estrellas en la Vía Láctea.", "Las nutrias se toman de las manos cuando duermen para no separarse.",
+            "El inventor de los Pringles fue enterrado en una lata de Pringles.", "Rusia tiene una superficie más grande que Plutón.",
+            "Las vacas tienen mejores amigas y se estresan si se separan.", "El nombre completo de Barbie es Barbara Millicent Roberts.",
+        ];
+        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        document.getElementById('daily-fact').textContent = `"${facts[dayOfYear % facts.length]}"`;
+
+        // --- Llamadas iniciales al cargar la página ---
         fetchWeather();
     });
     </script>
-
 </body>
 </html>
