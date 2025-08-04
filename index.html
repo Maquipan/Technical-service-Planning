@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://i.imgur.com/jM5y1qT.png" type="image/png">
+    <link rel="icon" href="logo2.png" type="image/png">
     <title>Portal de Aplicaciones Maquipan</title>
     <style>
         /* Estilos CSS Base */
@@ -28,7 +28,7 @@
             font-family: var(--font-main); margin: 0;
             background-color: var(--bg-primary); background-image: var(--bg-gradient);
             color: var(--text-primary); transition: background-color var(--transition-speed), color var(--transition-speed);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; padding: 2rem 0;
         }
         .container { max-width: 900px; width: 100%; margin: 0 auto; padding: 1rem 1.5rem; }
         .header-controls {
@@ -37,7 +37,7 @@
             border-radius: 12px 12px 0 0; border: 1px solid var(--border-color); border-bottom: none;
         }
         .header-title { display: flex; align-items: center; gap: 1rem; }
-        .logo { height: 35px; width: auto; object-fit: contain; }
+        .logo { height: 140px; width: auto; object-fit: contain; }
         .header-controls h1 { margin: 0; font-size: 1.5rem; color: var(--text-primary); font-weight: 600; }
         .card { 
             background-color: var(--bg-secondary); border: 1px solid var(--border-color);
@@ -107,6 +107,40 @@
         }
         #modal-cancel-btn { background-color: var(--bg-tertiary); color: var(--text-secondary); }
         #modal-submit-btn { background-color: var(--accent); color: var(--bg-primary); }
+
+        /* --- ESTILOS MEJORADOS PARA NOTICIAS --- */
+        #news-chile-list {
+            padding-left: 0;
+            list-style-type: none;
+        }
+        #news-chile-list li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        #news-chile-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        #news-chile-list li a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-speed);
+        }
+        #news-chile-list li a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        #news-chile-list li span.source {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: capitalize;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+        }
+
     </style>
 </head>
 <body>
@@ -114,7 +148,7 @@
     <div class="container">
         <div class="header-controls">
             <div class="header-title">
-                <img src="https://i.imgur.com/jM5y1qT.png" alt="Logo Maquipan" class="logo">
+                <img src="logo2.png" alt="Logo Maquipan" class="logo">
                 <h1>Portal de Aplicaciones</h1>
             </div>
             <div class="header-right">
@@ -163,33 +197,28 @@
             </div>
         </div>
 
-        <div class="widget-card">
-            <div id="horoscope-widget" style="text-align: center;">
-                <h3 style="margin-top:0; color: var(--text-primary);">Horóscopo del Día</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Selecciona tu signo para ver tu predicción:</p>
-                <select id="sign-selector" style="width: 200px; padding: 0.5rem; font-size: 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-tertiary); color: var(--text-primary);">
-                    <option value="" disabled selected>Elige un signo</option>
-                    <option value="aries">Aries</option><option value="taurus">Tauro</option><option value="gemini">Géminis</option>
-                    <option value="cancer">Cáncer</option><option value="leo">Leo</option><option value="virgo">Virgo</option>
-                    <option value="libra">Libra</option><option value="scorpio">Escorpio</option><option value="sagittarius">Sagitario</option>
-                    <option value="capricorn">Capricornio</option><option value="aquarius">Acuario</option><option value="pisces">Piscis</option>
-                </select>
-                <div id="horoscope-result" style="margin-top: 1.5rem; padding: 1rem; border: 1px dashed var(--border-color); border-radius: 8px; min-height: 100px; color: var(--text-secondary);">
-                    <p id="horoscope-text">Tu predicción aparecerá aquí...</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+            
+            <div class="widget-card">
+                <h3 style="margin-top:0;">Indicadores del Día</h3>
+                <div id="economic-indicators" style="color: var(--text-secondary); display: flex; justify-content: space-around; text-align: center;">
+                    <p>Cargando...</p>
                 </div>
             </div>
-        </div>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-            <div class="widget-card">
-                <h3 style="margin-top:0;">Novedades Maquipan</h3>
-                <ul id="news-list" style="padding-left: 20px; color: var(--text-secondary);"></ul>
-            </div>
+
             <div class="widget-card" style="text-align: center;">
-                <h3 style="margin-top:0;">🎉 ¡Feliz Cumpleaños! 🎉</h3>
-                <p id="birthday-names" style="color: var(--accent); font-weight: bold;"></p>
+                <h3 style="margin-top:0;">Un Chiste pa' la Tarde</h3>
+                <p id="daily-joke" style="font-style: italic; color: var(--text-secondary); padding: 0 1rem;"></p>
             </div>
-            <div class="widget-card" style="text-align: center;">
+
+            <div class="widget-card" style="grid-column: 1 / -1;">
+                <h3 style="margin-top:0;">Noticias de Chile</h3>
+                <ul id="news-chile-list">
+                    <li>Cargando noticias...</li>
+                </ul>
+            </div>
+
+            <div class="widget-card" style="text-align: center; grid-column: 1 / -1;">
                 <h3 style="margin-top:0;">Sabías que...</h3>
                 <p id="daily-fact" style="font-style: italic; color: var(--text-secondary);"></p>
             </div>
@@ -265,44 +294,68 @@
                     document.getElementById('weather-icon').alt = data.weather[0].description;
                 }).catch(error => { console.error('Error al cargar el clima:', error); document.getElementById('weather-desc').textContent = 'Error clima'; });
         };
+        
+        // --- Lógica de Noticias de Chile (MEJORADA) ---
+        const fetchChileNews = () => {
+            const apiKey = 'pub_f5ba5ea7a82144ba9f55ff8781390a55';
+            const newsListEl = document.getElementById('news-chile-list');
+            const apiUrl = `https://newsdata.io/api/1/news?apikey=${apiKey}&country=cl&language=es&category=top`;
 
-        // --- Lógica del Horóscopo (NUEVA API) ---
-        const fetchHoroscope = (sign) => {
-            const horoscopeTextEl = document.getElementById('horoscope-text');
-            if (!sign) { return; }
-            horoscopeTextEl.textContent = 'Cargando tu horóscopo...';
-            // Esta API (horoscope-app-api) es más estable y no requiere registro.
-            fetch(`https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=${sign}&day=TODAY`)
-                .then(response => { 
-                    if (!response.ok) throw new Error('API no disponible o signo inválido.'); 
-                    return response.json(); 
-                })
+            fetch(apiUrl)
+                .then(response => response.json())
                 .then(data => {
-                    // La API devuelve el texto en 'horoscope_data'
-                    const prediction = data.data.horoscope_data;
-                    horoscopeTextEl.textContent = prediction;
-                }).catch(error => { 
-                    console.error('Error al cargar el horóscopo:', error); 
-                    horoscopeTextEl.textContent = 'No se pudo cargar tu predicción en este momento.'; 
+                    newsListEl.innerHTML = '';
+                    if (data.results && data.results.length > 0) {
+                        const articlesToShow = data.results.slice(0, 5);
+                        articlesToShow.forEach(article => {
+                            const li = document.createElement('li');
+                            const source = article.source_id ? `<span class="source">${article.source_id}</span>` : '';
+                            li.innerHTML = `<a href="${article.link}" target="_blank">${article.title}</a>${source}`;
+                            newsListEl.appendChild(li);
+                        });
+                    } else {
+                        newsListEl.innerHTML = '<li>No se pudieron cargar las noticias.</li>';
+                    }
+                }).catch(error => {
+                    console.error('Error al cargar las noticias:', error);
+                    newsListEl.innerHTML = '<li>Error al cargar las noticias.</li>';
                 });
         };
-        document.getElementById('sign-selector').addEventListener('change', (event) => fetchHoroscope(event.target.value));
-
-
-        // --- Lógica de Novedades ---
-        const news = [ { date: "30/07/2025", text: "¡Nuevo récord de instalaciones en la V Región!" }, { date: "25/07/2025", text: "Capacitación de seguridad programada para el próximo viernes." }, { date: "22/07/2025", text: "Bienvenidos los nuevos integrantes al equipo técnico." }];
-        const newsList = document.getElementById('news-list');
-        news.forEach(item => { const li = document.createElement('li'); li.innerHTML = `<b>${item.date}:</b> ${item.text}`; newsList.appendChild(li); });
         
-        // --- Lógica de Cumpleaños ---
-        const birthdays = [ { name: "Juan Pérez", month: 7, day: 30 }, { name: "Anaís Rivera", month: 8, day: 1 } ];
-        const currentMonth = new Date().getMonth() + 1; const currentDay = new Date().getDate();
-        const todaysBirthdays = birthdays.filter(b => b.month === currentMonth && b.day === currentDay);
-        const birthdayNamesEl = document.getElementById('birthday-names');
-        if (todaysBirthdays.length > 0) { birthdayNamesEl.textContent = todaysBirthdays.map(b => b.name).join(', '); } 
-        else { birthdayNamesEl.textContent = "Hoy no hay cumpleaños en el equipo."; }
+        // --- Lógica de Indicadores Económicos ---
+        const fetchEconomicIndicators = () => {
+            const indicatorsEl = document.getElementById('economic-indicators');
+            fetch('https://mindicador.cl/api')
+                .then(response => response.json())
+                .then(data => {
+                    const uf = data.uf.valor;
+                    const dolar = data.dolar.valor;
+                    const euro = data.euro.valor;
 
-        // --- Lógica del Dato Curioso ---
+                    indicatorsEl.innerHTML = `
+                        <div style="flex: 1;">
+                            <strong style="color: var(--text-primary);">UF</strong>
+                            <p style="color: var(--accent); margin: 0.5rem 0; font-weight: 600;">$${uf.toLocaleString('es-CL')}</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <strong style="color: var(--text-primary);">Dólar</strong>
+                            <p style="color: var(--accent); margin: 0.5rem 0; font-weight: 600;">$${dolar.toLocaleString('es-CL')}</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <strong style="color: var(--text-primary);">Euro</strong>
+                            <p style="color: var(--accent); margin: 0.5rem 0; font-weight: 600;">$${euro.toLocaleString('es-CL')}</p>
+                        </div>
+                    `;
+                }).catch(error => {
+                    console.error('Error al cargar indicadores:', error);
+                    indicatorsEl.innerHTML = '<p>No se pudieron cargar los datos.</p>';
+                });
+        };
+
+        // --- Lógica del Dato Curioso y Chiste del Día---
+        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        
+        // --- Dato Curioso
         const facts = [
             "El pan es uno de los alimentos más antiguos, con evidencias de hace más de 14,000 años.", "La primera máquina para amasar pan fue inventada por un ingeniero francés en 1760.",
             "Contrario a la creencia popular, el croissant se originó en Viena, Austria, no en Francia.", "El olor a pan recién horneado es uno de los que genera mayor sensación de confort y hogar.",
@@ -313,11 +366,24 @@
             "El inventor de los Pringles fue enterrado en una lata de Pringles.", "Rusia tiene una superficie más grande que Plutón.",
             "Las vacas tienen mejores amigas y se estresan si se separan.", "El nombre completo de Barbie es Barbara Millicent Roberts.",
         ];
-        const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
         document.getElementById('daily-fact').textContent = `"${facts[dayOfYear % facts.length]}"`;
+        
+        // --- Chiste Chileno
+        const jokes = [
+            "¿Qué le dijo un semáforo a otro? '¡No me mires, que me estoy cambiando!'",
+            "Un chileno le pregunta a otro: 'Oye, ¿cachai qué hora es?' Y el otro le responde: 'No, pero espérate un poquito, que ahí viene la micro'.",
+            "¿Por qué los chilenos no pueden entrar a la NASA? Porque si les dicen 'Tierra a la vista', se bajan todos.",
+            "Va un curadito en la micro y le pisa el pie a una señora. La señora, enojada, le dice: '¡Oiga, bestia!' Y el curadito le responde: 'Mucho gusto, yo soy Fernando'.",
+            "En un restaurante: 'Mozo, ¿este pescado viene solo?' Y el mozo: 'No, se lo traje yo'.",
+            "¿Cuál es el colmo de un jardinero? Que su hija se llame Margarita y lo deje plantado.",
+            "¿Qué es un electrón vestido de huaso? ¡Un huasón!",
+        ];
+        document.getElementById('daily-joke').innerHTML = jokes[dayOfYear % jokes.length];
 
         // --- Llamadas iniciales al cargar la página ---
         fetchWeather();
+        fetchChileNews();
+        fetchEconomicIndicators();
     });
     </script>
 </body>
