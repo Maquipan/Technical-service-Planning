@@ -123,6 +123,7 @@
             padding: 2rem 3rem;
             overflow-y: auto;
             position: relative;
+            z-index: 5; /* Asegura que el panel principal esté clickable */
         }
 
         /* Header Area */
@@ -155,6 +156,7 @@
             padding-bottom: 2rem;
         }
 
+        /* --- FIX PARA PC: Mejoras en la tarjeta para clics --- */
         .card {
             background: rgba(30, 41, 59, 0.4);
             border: var(--glass-border);
@@ -170,8 +172,19 @@
             justify-content: space-between;
             min-height: 220px;
             animation: fadeInUp 0.6s ease-out backwards;
+            
+            /* Propiedades nuevas para arreglar el clic en PC */
+            cursor: pointer;
+            user-select: none; /* Evita que el texto se seleccione al hacer clic */
+            -webkit-user-drag: none; /* Evita arrastrar la tarjeta */
+            z-index: 1; /* Asegura que esté por encima de fondos */
         }
         
+        /* Hace que los elementos internos no bloqueen el clic del enlace padre */
+        .card > * {
+            pointer-events: none;
+        }
+
         /* Retrasos de animación */
         .card:nth-child(1) { animation-delay: 0.1s; }
         .card:nth-child(2) { animation-delay: 0.2s; }
